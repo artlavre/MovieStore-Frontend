@@ -1,0 +1,11 @@
+﻿# Project exclude paths
+/movie-store-frontend/src/components/Header.js
+/movie-store-frontend/src/components/MovieCard.js
+/movie-store-frontend/src/components/NotFound.js
+/movie-store-frontend/src/components/Search.js
+/movie-store-frontend/src/components/Spinner.js
+/movie-store-frontend/src/hooks/useMultiStepForm.js
+/movie-store-frontend/src/pages/AddMoviePage.js
+/movie-store-frontend/src/pages/SearchMoviesPage.js
+/movie-store-frontend/src/App.js
+/movie-store-frontend/src/main.js
