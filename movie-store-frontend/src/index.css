@@ -113,16 +113,28 @@
       @apply relative flex justify-center;
     }
 
+    & label {
+      @apply flex mb-3 px-2;
+    }
+
     & input {
       @apply w-full rounded bg-light-200/12 py-4 sm:pr-10 pl-10 text-base text-gray-200 shadow-2xl mb-5;
     }
 
-    & input.description {
-      @apply w-full rounded bg-light-200/12 py-4 sm:pr-10 pl-10 text-base text-gray-200 shadow-2xl mb-5;
+    & input.cover {
+      @apply flex font-bold ;
+    }
+
+    & input::file-selector-button {
+      @apply py-2 px-4 border-2 rounded mr-3 hover:cursor-pointer;
+    }
+
+    & textarea {
+      @apply  w-full rounded bg-light-200/12 py-4 sm:pr-10 pl-10 text-base text-gray-200 shadow-2xl mb-5 h-30;
     }
 
     & button {
-      @apply my-5 px-10 py-3 rounded cursor-pointer font-bold text-xl;
+      @apply my-5 px-10 py-3 rounded cursor-pointer font-bold text-xl mr-5;
     }
 
     .back {
