@@ -20,7 +20,7 @@ const INITIAL_DATA: AddMovieData = {
     title : "",
     description : "",
     language : "En",
-    rating : 0,
+    rating : 5,
     actors : "",
     releaseDate : new Date()
 }
@@ -44,11 +44,27 @@ function AddMoviePage() {
         })
     }
 
-    const addMovieRequest = async () => {
+    const addMovieRequest = async (dataObject: AddMovieData) => {
         try{
             const query = `${API_BASE_URL}/movies`;
+            const formData = new FormData();
 
-            var response = await fetch(query, API_OPTIONS);
+            formData.append("title", dataObject.title);
+            formData.append("description", dataObject.description);
+            formData.append("language", dataObject.language);
+            formData.append("rating", String(dataObject.rating));
+
+            if (dataObject.movieCover) { // 🔹 Проверяем перед добавлением
+                formData.append("movieCover", dataObject.movieCover);
+            }
+
+            var response = await fetch(query, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    accept: "application/json",
+                }
+            });
 
             if(!response.ok){
                 throw new Error("Something went wrong!");
@@ -78,7 +94,7 @@ function AddMoviePage() {
         if(!isLastStep) {
             return next()
         }
-        addMovieRequest();
+        addMovieRequest(data);
     }
     return (
         <div className="add-movie">
