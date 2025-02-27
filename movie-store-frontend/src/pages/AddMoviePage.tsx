@@ -1,5 +1,5 @@
 ﻿import {useMultiStepForm} from "../hooks/useMultiStepForm.tsx";
-import {FirstStep} from "../steps/FirstStep.tsx";
+import {FirstStep} from "../hooks/steps/FirstStep.tsx";
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActorsStep} from "../hooks/steps/ActorsStep.tsx";

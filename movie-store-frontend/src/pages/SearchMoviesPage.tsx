@@ -2,7 +2,8 @@
 import Search from "../components/Search.tsx";
 import Spinner from "../components/Spinner.tsx";
 import MovieCard from "../components/MovieCard.tsx";
-import { Movie } from "../types/Movie.ts";
+import searchMovieStore from "../stores/movies/searchMovieStore.tsx";
+import {observer} from "mobx-react-lite";
 
 const API_BASE_URL = "https://localhost:44343/api";
 
@@ -13,15 +14,12 @@ const API_OPTIONS = {
     }
 };
 
-function SearchMoviesPage() {
+const SearchMoviesPage = observer(() => {
     const [searchTerm, setSearchTerm] = useState("");
-    const [errorMessage, setErrorMessage] = useState('');
 
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const [isLoading, setLoading] = useState(false);
     const fetchMovies = async (query = '') => {
-        setLoading(true);
-        setErrorMessage('');
+        searchMovieStore.setIsLoading(true);
+        searchMovieStore.setError('');
 
         try{
             const endppoint = query
@@ -39,18 +37,16 @@ function SearchMoviesPage() {
             console.log(data);
 
             if(data.Response === "False"){
-                setErrorMessage("Something went wrong");
-                setMovies([]);
+                searchMovieStore.setError("Something went wrong");
+                searchMovieStore.setMovies([]);
                 return;
             }
 
-            setMovies(data || []);
+            searchMovieStore.setMovies(data || []);
         } catch(error){
-            console.log(`Error fetching movies: ${error}`);
-
-            setErrorMessage('Error while fetching movies. Please try again later');
+            searchMovieStore.setError('Error while fetching movies. Please try again later');
         }finally {
-            setLoading(false);
+            searchMovieStore.setIsLoading(false);
         }
     }
 
@@ -64,7 +60,7 @@ function SearchMoviesPage() {
 
             <div className="wrapper">
                 <section className="greating">
-                    <img src="./hero-img.png" alt="Hero"/>
+                    <img src="/hero-img.png" alt="Hero"/>
                     <h1><span className="text-gradient">Find</span> or <span className="text-gradient">Add</span> Movies</h1>
 
                     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -73,13 +69,13 @@ function SearchMoviesPage() {
                 <section className="all-movies">
                     <h2 className="mt-[40px]">All Movies</h2>
 
-                    {isLoading ? (
+                    {searchMovieStore.isLoading ? (
                         <Spinner />
-                    ) : errorMessage ? (
-                        <p className="text-red-500">{errorMessage}</p>
+                    ) : searchMovieStore.error ? (
+                        <p className="text-red-500">{searchMovieStore.error}</p>
                     ) :(
                         <ul>
-                            {movies.map(movie => (
+                            {searchMovieStore.movies.map(movie => (
                                 <MovieCard key={movie.id} movie={movie}/>
                             ))}
                         </ul>
@@ -88,6 +84,6 @@ function SearchMoviesPage() {
             </div>
         </main>
     );
-}
+});
 
 export default SearchMoviesPage;
