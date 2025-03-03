@@ -1,14 +1,12 @@
-﻿type MovieData = {
+﻿import addMovieStore from "../../stores/movies/addMovieStore.tsx";
+
+type MovieData = {
     title: string,
     releaseDate: Date,
     description: string,
 }
 
-type FirstStepProps = MovieData & {
-    updateFields: (fields: Partial<MovieData>) => void
-}
-
-export function FirstStep({title, releaseDate, description, updateFields}: FirstStepProps) {
+export function FirstStep({title, releaseDate, description}: MovieData) {
     return (
         <div>
             <h1>Movie Description</h1>
@@ -18,14 +16,14 @@ export function FirstStep({title, releaseDate, description, updateFields}: First
                 placeholder="Movie name"
                 required={true}
                 value={title}
-                onChange={e => updateFields({title: e.target.value})}
+                onChange={e => addMovieStore.movie.title = e.target.value}
             />
             <label>Release Date</label>
             <input
                 type="date"
                 required={true}
                 value={releaseDate.toISOString().split('T')[0]}
-                onChange={e => updateFields({releaseDate: new Date(e.target.value)})}
+                onChange={e => addMovieStore.movie.releaseDate = new Date(e.target.value)}
             />
             <label>Movie Description</label>
             <textarea
@@ -33,7 +31,7 @@ export function FirstStep({title, releaseDate, description, updateFields}: First
                 placeholder="Description"
                 required={true}
                 value={description}
-                onChange={e => updateFields({description: e.target.value})}
+                onChange={e => addMovieStore.movie.description = e.target.value}
             />
         </div>
     );

@@ -1,52 +1,18 @@
 ﻿import {useMultiStepForm} from "../hooks/useMultiStepForm.tsx";
 import {FirstStep} from "../hooks/steps/FirstStep.tsx";
-import {FormEvent, useState} from "react";
+import {FormEvent} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActorsStep} from "../hooks/steps/ActorsStep.tsx";
 import {LastStep} from "../hooks/steps/LastStep.tsx";
-
-type AddMovieData = {
-    movieCover: File | null,
-    title : string,
-    description : string,
-    language : string,
-    rating : number,
-    actors : string,
-    releaseDate : Date
-}
-
-const INITIAL_DATA: AddMovieData = {
-    movieCover : null,
-    title : "",
-    description : "",
-    language : "En",
-    rating : 5,
-    actors : "",
-    releaseDate : new Date()
-}
-
-const API_BASE_URL = "https://localhost:44343/api";
-
-const API_OPTIONS = {
-    method: "POST",
-    headers: {
-        accept: "application/json",
-    }
-};
+import {api} from "../api/api.ts";
+import addMovieStore from "../stores/movies/addMovieStore.tsx";
+import {AddMovieData} from "../types/AddMovie.ts";
 
 function AddMoviePage() {
     const navigate = useNavigate();
-    const [data, setData] = useState(INITIAL_DATA);
-
-    function updateData(newData: Partial<AddMovieData>) {
-        setData(prevState => {
-            return {...prevState, ...newData};
-        })
-    }
 
     const addMovieRequest = async (dataObject: AddMovieData) => {
         try{
-            const query = `${API_BASE_URL}/movies`;
             const formData = new FormData();
 
             formData.append("title", dataObject.title);
@@ -58,21 +24,15 @@ function AddMoviePage() {
                 formData.append("movieCover", dataObject.movieCover);
             }
 
-            var response = await fetch(query, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    accept: "application/json",
-                }
-            });
+            const response = await api.post("/movies", formData);
 
-            if(!response.ok){
+            if(response.status !== 200){
                 throw new Error("Something went wrong!");
             }
 
-            var data = await response.json();
+            const data = response.data;
 
-            if(data === null){
+            if(data === ''){
                 throw new Error("data was not accepted");
             }
 
@@ -85,16 +45,16 @@ function AddMoviePage() {
 
     const {steps, currentStep, step, isFirstStep, isLastStep, back, next} =
         useMultiStepForm([
-            <FirstStep {...data} updateFields={updateData}/>,
-            <ActorsStep {...data} updateFields={updateData}/>,
-            <LastStep {...data} updateFields={updateData}/>]);
+            <FirstStep {...addMovieStore.movie}/>,
+            <ActorsStep {...addMovieStore.movie}/>,
+            <LastStep {...addMovieStore.movie}/>]);
 
-    function onSubmit(e: FormEvent) {
+    async function onSubmit(e: FormEvent) {
         e.preventDefault();
         if(!isLastStep) {
             return next()
         }
-        addMovieRequest(data);
+        await addMovieRequest(addMovieStore.movie);
     }
     return (
         <div className="add-movie">

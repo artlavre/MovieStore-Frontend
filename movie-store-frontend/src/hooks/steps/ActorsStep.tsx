@@ -1,12 +1,10 @@
-﻿type MovieData = {
+﻿import addMovieStore from "../../stores/movies/addMovieStore.tsx";
+
+type MovieData = {
     actors: string,
 }
 
-type ActorsStep = MovieData & {
-    updateFields: (fields: Partial<MovieData>) => void
-}
-
-export function ActorsStep({actors, updateFields}: ActorsStep) {
+export function ActorsStep({actors}: MovieData) {
     return(
         <div>
             <h1>Actors</h1>
@@ -17,7 +15,7 @@ export function ActorsStep({actors, updateFields}: ActorsStep) {
                 required={true}
                 value={actors}
                 placeholder="Name actor"
-                onChange={e => updateFields({actors: e.target.value})}/>
+                onChange={e => addMovieStore.movie.actors = e.target.value}/>
         </div>
     );
 }

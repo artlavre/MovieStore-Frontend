@@ -4,15 +4,7 @@ import Spinner from "../components/Spinner.tsx";
 import MovieCard from "../components/MovieCard.tsx";
 import searchMovieStore from "../stores/movies/searchMovieStore.tsx";
 import {observer} from "mobx-react-lite";
-
-const API_BASE_URL = "https://localhost:44343/api";
-
-const API_OPTIONS = {
-    method: "GET",
-    headers: {
-        accept: "application/json",
-    }
-};
+import {api} from "../api/api.ts";
 
 const SearchMoviesPage = observer(() => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -23,16 +15,16 @@ const SearchMoviesPage = observer(() => {
 
         try{
             const endppoint = query
-                ? `${API_BASE_URL}/movies?title=${encodeURIComponent(query)}`
-                : `${API_BASE_URL}/movies`;
+                ? `/movies?title=${encodeURIComponent(query)}`
+                : `/movies`;
 
-            const response = await fetch(endppoint, API_OPTIONS);
+            const response = await api.get(endppoint);
 
-            if(!response.ok){
+            if(response.status !== 200){
                 throw new Error("No movies found");
             }
 
-            var data = await response.json();
+            var data = response.data;
 
             console.log(data);
 

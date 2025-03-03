@@ -1,14 +1,11 @@
-﻿type MovieData = {
+﻿import addMovieStore from "../../stores/movies/addMovieStore.tsx";
+
+type MovieData = {
     rating : number,
-    language: string,
-    movieCover: File | null,
+    language: string
 }
 
-type LastStepProps = MovieData & {
-    updateFields: (fields: Partial<MovieData>) => void
-}
-
-export function LastStep({rating, language, movieCover, updateFields}: LastStepProps) {
+export function LastStep({rating, language}: MovieData) {
     return (
         <div>
             <h1>Additional Info</h1>
@@ -18,21 +15,21 @@ export function LastStep({rating, language, movieCover, updateFields}: LastStepP
                 type="number"
                 required={true}
                 value={rating}
-                onChange={e => updateFields({rating: Number(e.target.value)})}
+                onChange={e => addMovieStore.movie.rating = Number(e.target.value)}
             />
             <label>Movie language</label>
             <input
                 type="text"
                 required={true}
                 value={language}
-                onChange={e => updateFields({language: e.target.value})}
+                onChange={e => addMovieStore.movie.language = e.target.value}
             />
             <label>Movie cover</label>
             <input
                 className="cover"
                 type="file"
                 accept="image/png, image/jpeg"
-                onChange={e => updateFields({movieCover: e.target.files ? e.target.files[0] : null})}
+                onChange={e =>addMovieStore.movie.movieCover = e.target.files ? e.target.files[0] : null}
             />
         </div>
     );
