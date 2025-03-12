@@ -4,10 +4,12 @@ import Header from "./components/Header.tsx";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./components/NotFound.tsx";
 import AddMoviePage from "./pages/AddMoviePage.tsx";
+import {ToastContainer} from "react-toastify";
 
 function App() {
     return (
         <>
+            <ToastContainer />
             <Header />
             <Routes>
                 <Route path="/" element={<SearchMoviesPage />}/>

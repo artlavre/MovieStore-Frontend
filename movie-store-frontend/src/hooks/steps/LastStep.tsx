@@ -1,11 +1,13 @@
 ﻿import addMovieStore from "../../stores/movies/addMovieStore.tsx";
+import {observer} from "mobx-react-lite";
 
 type MovieData = {
     rating : number,
     language: string
 }
 
-export function LastStep({rating, language}: MovieData) {
+export const LastStep = observer(() => {
+    const {movie} = addMovieStore;
     return (
         <div>
             <h1>Additional Info</h1>
@@ -14,14 +16,14 @@ export function LastStep({rating, language}: MovieData) {
             <input
                 type="number"
                 required={true}
-                value={rating}
+                value={movie.rating}
                 onChange={e => addMovieStore.movie.rating = Number(e.target.value)}
             />
             <label>Movie language</label>
             <input
                 type="text"
                 required={true}
-                value={language}
+                value={movie.language}
                 onChange={e => addMovieStore.movie.language = e.target.value}
             />
             <label>Movie cover</label>
@@ -33,4 +35,4 @@ export function LastStep({rating, language}: MovieData) {
             />
         </div>
     );
-}
+})

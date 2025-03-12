@@ -5,15 +5,16 @@ import {useNavigate} from "react-router-dom";
 import {ActorsStep} from "../hooks/steps/ActorsStep.tsx";
 import {LastStep} from "../hooks/steps/LastStep.tsx";
 import addMovieStore from "../stores/movies/addMovieStore.tsx";
+import {toast} from "react-toastify";
 
 function AddMoviePage() {
     const navigate = useNavigate();
 
     const {steps, currentStep, step, isFirstStep, isLastStep, back, next} =
         useMultiStepForm([
-            <FirstStep {...addMovieStore.movie}/>,
-            <ActorsStep {...addMovieStore.movie}/>,
-            <LastStep {...addMovieStore.movie}/>]);
+            <FirstStep/>,
+            <ActorsStep/>,
+            <LastStep />]);
 
     async function onSubmit(e: FormEvent) {
         e.preventDefault();
@@ -21,16 +22,17 @@ function AddMoviePage() {
             return next()
         }
 
+        toast.error("Movie added failed");
         await addMovieStore.addMovie();
 
         if(addMovieStore.state === "done") {
-            //alert
+            toast.done("Movie added successfully.");
             navigate("/");
             return;
         }
 
         if(addMovieStore.state === "error") {
-            //alert
+            toast.error("Movie added failed");
             return;
         }
     }
