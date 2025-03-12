@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {AddMovieData} from "../../types/AddMovie.ts";
+import {addMovieRequest} from "../../api/movieApi.ts";
 
 class SearchMovieStore{
     movie: AddMovieData;
@@ -45,6 +46,18 @@ class SearchMovieStore{
 
     setMovieCover(movieCover:File){
         this.movie.movieCover = movieCover;
+    }
+
+    async addMovie(){
+        this.state = "pending";
+
+        try{
+            await addMovieRequest(this.movie);
+            this.state = "done";
+        }catch(e){
+            this.state = "error";
+            console.error(e);
+        }
     }
 }
 

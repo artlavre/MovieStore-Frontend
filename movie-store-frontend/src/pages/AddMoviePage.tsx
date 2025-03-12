@@ -4,44 +4,10 @@ import {FormEvent} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActorsStep} from "../hooks/steps/ActorsStep.tsx";
 import {LastStep} from "../hooks/steps/LastStep.tsx";
-import {api} from "../api/api.ts";
 import addMovieStore from "../stores/movies/addMovieStore.tsx";
-import {AddMovieData} from "../types/AddMovie.ts";
 
 function AddMoviePage() {
     const navigate = useNavigate();
-
-    const addMovieRequest = async (dataObject: AddMovieData) => {
-        try{
-            const formData = new FormData();
-
-            formData.append("title", dataObject.title);
-            formData.append("description", dataObject.description);
-            formData.append("language", dataObject.language);
-            formData.append("rating", String(dataObject.rating));
-
-            if (dataObject.movieCover) { // 🔹 Проверяем перед добавлением
-                formData.append("movieCover", dataObject.movieCover);
-            }
-
-            const response = await api.post("/movies", formData);
-
-            if(response.status !== 200){
-                throw new Error("Something went wrong!");
-            }
-
-            const data = response.data;
-
-            if(data === ''){
-                throw new Error("data was not accepted");
-            }
-
-            navigate("/");
-        }
-        catch(error){
-            alert(error);
-        }
-    }
 
     const {steps, currentStep, step, isFirstStep, isLastStep, back, next} =
         useMultiStepForm([
@@ -54,8 +20,21 @@ function AddMoviePage() {
         if(!isLastStep) {
             return next()
         }
-        await addMovieRequest(addMovieStore.movie);
+
+        await addMovieStore.addMovie();
+
+        if(addMovieStore.state === "done") {
+            //alert
+            navigate("/");
+            return;
+        }
+
+        if(addMovieStore.state === "error") {
+            //alert
+            return;
+        }
     }
+
     return (
         <div className="add-movie">
             <form onSubmit={onSubmit}>
