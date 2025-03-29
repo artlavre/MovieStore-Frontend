@@ -5,8 +5,12 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "./components/NotFound.tsx";
 import AddMoviePage from "./pages/AddMoviePage.tsx";
 import {ToastContainer} from "react-toastify";
+import {registerServiceWorker} from "./serviceWorkerRegister.ts";
 
 function App() {
+
+    registerServiceWorker();
+
     return (
         <>
             <ToastContainer />
