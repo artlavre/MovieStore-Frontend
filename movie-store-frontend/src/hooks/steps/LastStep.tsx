@@ -31,7 +31,7 @@ export const LastStep = observer(() => {
                 className="cover"
                 type="file"
                 accept="image/png, image/jpeg"
-                onChange={e =>addMovieStore.movie.movieCover = e.target.files ? e.target.files[0] : null}
+                onChange={e => addMovieStore.movie.movieCover = e.target.files ? e.target.files[0] : null}
             />
         </div>
     );
