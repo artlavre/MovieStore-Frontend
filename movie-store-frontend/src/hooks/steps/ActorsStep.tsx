@@ -2,8 +2,6 @@
 import {observer} from "mobx-react-lite";
 
 export const ActorsStep = observer(() => {
-    const {movie} = addMovieStore;
-
     return(
         <div>
             <h1>Actors</h1>
@@ -12,9 +10,9 @@ export const ActorsStep = observer(() => {
             <input
                 type="text"
                 required={true}
-                value={movie.actors}
+                value={addMovieStore.movie.actors}
                 placeholder="Name actor"
-                onChange={e => addMovieStore.movie.actors = e.target.value} />
+                onChange={e => addMovieStore.setMovieActors(e.target.value)} />
         </div>
     );
 })

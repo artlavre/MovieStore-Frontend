@@ -2,20 +2,22 @@ import {AddMovieData} from "../../types/AddMovie.ts";
 import {addMovieRequest} from "../../api/movieApi.ts";
 import {makeAutoObservable} from "mobx";
 
+const baseMovieConfig = {
+    movieCover: null,
+    title: "",
+    rating: 0,
+    actors: "",
+    description: "",
+    language: "",
+    releaseDate: new Date(),
+}
+
 class SearchMovieStore{
     movie: AddMovieData;
     state: "idle" | "pending" | "done" | "error" = "idle";
 
     constructor(){
-        this.movie = {
-            movieCover: null,
-            title: "",
-            rating: 0,
-            actors: "",
-            description: "",
-            language: "",
-            releaseDate: new Date(),
-        };
+        this.movie = baseMovieConfig;
 
         makeAutoObservable(this);
     }
@@ -44,7 +46,7 @@ class SearchMovieStore{
         this.movie.releaseDate = movieDate;
     }
 
-    setMovieCover(movieCover:File){
+    setMovieCover(movieCover:File | null){
         this.movie.movieCover = movieCover;
     }
 

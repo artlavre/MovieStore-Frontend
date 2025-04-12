@@ -1,5 +1,5 @@
 ﻿export interface AddMovieData {
-    movieCover: File | null;
+    movieCover: File | null | undefined;
     title : string;
     description : string;
     language : string;

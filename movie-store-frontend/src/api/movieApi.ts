@@ -21,7 +21,7 @@ export const addMovieRequest = async (dataObject: AddMovieData) => {
 
     const data = response.data;
 
-    if(data === ''){
+    if(data === ""){
         throw new Error("data was not accepted");
     }
 }

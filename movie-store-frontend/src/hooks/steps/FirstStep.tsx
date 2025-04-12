@@ -2,8 +2,6 @@
 import {observer} from "mobx-react-lite";
 
 export const FirstStep = observer(() => {
-    const { movie } = addMovieStore;
-
     return (
         <div>
             <h1>Movie Description</h1>
@@ -13,16 +11,16 @@ export const FirstStep = observer(() => {
                 type="text"
                 placeholder="Movie name"
                 required
-                value={movie.title}
-                onChange={(e) => (movie.title = e.target.value)}
+                value={addMovieStore.movie.title}
+                onChange={(e) => (addMovieStore.setMovieTitle(e.target.value))}
             />
 
             <label>Release Date</label>
             <input
                 type="date"
                 required
-                value={movie.releaseDate.toISOString().split('T')[0]}
-                onChange={(e) => (movie.releaseDate = new Date(e.target.value))}
+                value={addMovieStore.movie.releaseDate.toISOString().split("T")[0]}
+                onChange={(e) => (addMovieStore.setMovieDate(new Date(e.target.value)))}
             />
 
             <label>Movie Description</label>
@@ -30,8 +28,8 @@ export const FirstStep = observer(() => {
                 className="description"
                 placeholder="Description"
                 required
-                value={movie.description}
-                onChange={(e) => (movie.description = e.target.value)}
+                value={addMovieStore.movie.description}
+                onChange={(e) => (addMovieStore.setMovieDescription(e.target.value))}
             />
         </div>
     );

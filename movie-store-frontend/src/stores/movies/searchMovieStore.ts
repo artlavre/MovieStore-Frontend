@@ -3,7 +3,7 @@ import {makeAutoObservable} from "mobx";
 
 class SearchMovieStore{
     movies: Movie[] = [];
-    error: string = '';
+    error: string = "";
     isLoading: boolean = false;
     state: "idle" | "pending" | "done" | "error" = "idle";
 

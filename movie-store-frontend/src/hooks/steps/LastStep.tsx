@@ -1,11 +1,6 @@
 ﻿import addMovieStore from "../../stores/movies/addMovieStore.ts";
 import {observer} from "mobx-react-lite";
 
-type MovieData = {
-    rating : number,
-    language: string
-}
-
 export const LastStep = observer(() => {
     const {movie} = addMovieStore;
     return (
@@ -17,21 +12,25 @@ export const LastStep = observer(() => {
                 type="number"
                 required={true}
                 value={movie.rating}
-                onChange={e => addMovieStore.movie.rating = Number(e.target.value)}
+                onChange={e => addMovieStore.setMovieRating(Number(e.target.value))}
             />
             <label>Movie language</label>
             <input
                 type="text"
                 required={true}
                 value={movie.language}
-                onChange={e => addMovieStore.movie.language = e.target.value}
+                onChange={e => addMovieStore.setMovieLanguage(e.target.value)}
             />
             <label>Movie cover</label>
             <input
                 className="cover"
                 type="file"
                 accept="image/png, image/jpeg"
-                onChange={e => addMovieStore.movie.movieCover = e.target.files ? e.target.files[0] : null}
+                onChange={e => {
+                    const file = e.target.files?.[0] ?? null;
+                    addMovieStore.setMovieCover(file)
+                }
+            }
             />
         </div>
     );

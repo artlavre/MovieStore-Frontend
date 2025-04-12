@@ -1,4 +1,4 @@
-import './App.css'
+import "./App.css"
 import SearchMoviesPage from "./pages/SearchMoviesPage.tsx";
 import Header from "./components/Header.tsx";
 import NotFound from "./pages/NotFound.tsx";

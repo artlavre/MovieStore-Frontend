@@ -9,14 +9,14 @@ import {api} from "../api/api.ts";
 const SearchMoviesPage = observer(() => {
     const [searchTerm, setSearchTerm] = useState("");
 
-    const fetchMovies = async (query = '') => {
+    const fetchMovies = async (query = "") => {
         searchMovieStore.setIsLoading(true);
-        searchMovieStore.setError('');
+        searchMovieStore.setError("");
 
         try{
             const endppoint = query
                 ? `/movies?title=${encodeURIComponent(query)}`
-                : `/movies`;
+                : "/movies";
 
             const response = await api.get(endppoint);
 
@@ -36,7 +36,7 @@ const SearchMoviesPage = observer(() => {
 
             searchMovieStore.setMovies(data || []);
         } catch(error){
-            searchMovieStore.setError('Error while fetching movies. Please try again later');
+            searchMovieStore.setError("Error while fetching movies. Please try again later");
         }finally {
             searchMovieStore.setIsLoading(false);
         }

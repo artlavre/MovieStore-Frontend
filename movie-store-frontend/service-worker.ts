@@ -1,9 +1,9 @@
 ﻿const cacheName = "v2";
 
 const cacheAssets = [
-    'index.html',
-    'src/main.js',
-    '/src/index.css'
+    "index.html",
+    "src/main.js",
+    "/src/index.css"
 ]
 
 self.addEventListener("install", (e: any) => {
@@ -32,7 +32,7 @@ self.addEventListener("activate", (e: any) => {
             return Promise.all(
                 cacheKeys.map((key: any) => {
                     if(key !== cacheName) {
-                        console.log(`old keys was`);
+                        console.log("old keys was");
                         return caches.delete(key);
                     }
                 })

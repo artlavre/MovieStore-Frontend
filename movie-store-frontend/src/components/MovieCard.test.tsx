@@ -3,11 +3,11 @@ import {render} from "@testing-library/react";
 import {Movie} from "../types/Movie.ts";
 
 const baseMovie: Movie = {
-    id: '1',
-    title: 'Inception',
+    id: "1",
+    title: "Inception",
     rating: 8.8,
-    language: 'English',
-    releaseDate: '2010-07-16',
+    language: "English",
+    releaseDate: "2010-07-16",
     coverUrl: ""
 };
 
