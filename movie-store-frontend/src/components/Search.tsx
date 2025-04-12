@@ -7,7 +7,7 @@ function Search({searchTerm, setSearchTerm}: SearchProps) {
     return (
         <div className="search">
             <div>
-                <img src="search.svg"/>
+                <img src="search.svg" />
 
                 <input
                     type="search"

@@ -1,4 +1,4 @@
-﻿import addMovieStore from "../../stores/movies/addMovieStore.tsx";
+﻿import addMovieStore from "../../stores/movies/addMovieStore.ts";
 import {observer} from "mobx-react-lite";
 
 type MovieData = {

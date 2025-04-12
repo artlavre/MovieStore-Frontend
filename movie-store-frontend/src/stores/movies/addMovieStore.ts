@@ -1,6 +1,6 @@
-import {makeAutoObservable} from "mobx";
 import {AddMovieData} from "../../types/AddMovie.ts";
 import {addMovieRequest} from "../../api/movieApi.ts";
+import {makeAutoObservable} from "mobx";
 
 class SearchMovieStore{
     movie: AddMovieData;

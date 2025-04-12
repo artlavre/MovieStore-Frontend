@@ -4,7 +4,7 @@ import {FormEvent} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActorsStep} from "../hooks/steps/ActorsStep.tsx";
 import {LastStep} from "../hooks/steps/LastStep.tsx";
-import addMovieStore from "../stores/movies/addMovieStore.tsx";
+import addMovieStore from "../stores/movies/addMovieStore.ts";
 import {toast} from "react-toastify";
 
 function AddMoviePage() {
@@ -12,8 +12,8 @@ function AddMoviePage() {
 
     const {steps, currentStep, step, isFirstStep, isLastStep, back, next} =
         useMultiStepForm([
-            <FirstStep/>,
-            <ActorsStep/>,
+            <FirstStep />,
+            <ActorsStep />,
             <LastStep />]);
 
     async function onSubmit(e: FormEvent) {

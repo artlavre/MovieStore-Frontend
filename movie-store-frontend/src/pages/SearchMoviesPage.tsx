@@ -2,7 +2,7 @@
 import Search from "../components/Search.tsx";
 import Spinner from "../components/Spinner.tsx";
 import MovieCard from "../components/MovieCard.tsx";
-import searchMovieStore from "../stores/movies/searchMovieStore.tsx";
+import searchMovieStore from "../stores/movies/searchMovieStore.ts";
 import {observer} from "mobx-react-lite";
 import {api} from "../api/api.ts";
 
@@ -48,11 +48,11 @@ const SearchMoviesPage = observer(() => {
 
     return (
         <main>
-            <div className="pattern"/>
+            <div className="pattern" />
 
             <div className="wrapper">
                 <section className="greating">
-                    <img src="/hero-img.png" alt="Hero"/>
+                    <img src="/hero-img.png" alt="Hero" />
                     <h1><span className="text-gradient">Find</span> or <span className="text-gradient">Add</span> Movies</h1>
 
                     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -68,7 +68,7 @@ const SearchMoviesPage = observer(() => {
                     ) :(
                         <ul>
                             {searchMovieStore.movies.map(movie => (
-                                <MovieCard key={movie.id} movie={movie}/>
+                                <MovieCard key={movie.id} movie={movie} />
                             ))}
                         </ul>
                     )}
