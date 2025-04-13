@@ -1,7 +1,7 @@
-import globals from "globals"
-import react from "eslint-plugin-react"
-import reactRefresh from "eslint-plugin-react-refresh"
-import tseslint from "typescript-eslint"
+import globals from "globals";
+import react from "eslint-plugin-react";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
 
 export default [
   { ignores: ["build"] },
@@ -22,16 +22,17 @@ export default [
       "react-refresh": reactRefresh,
     },
     rules: {
-      "quotes": ["error", "double", { avoidEscape: true }],
+      quotes: ["error", "double", { avoidEscape: true }],
+
       "react/jsx-tag-spacing": [
-          "error",
+        "error",
         {
           closingSlash: "never",
           beforeSelfClosing: "always",
           afterOpening: "never",
           beforeClosing: "never",
-        }
+        },
       ],
     },
   },
-]
+];

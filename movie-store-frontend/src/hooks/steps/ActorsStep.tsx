@@ -1,18 +1,19 @@
 ﻿import addMovieStore from "../../stores/movies/addMovieStore.ts";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 
 export const ActorsStep = observer(() => {
-    return(
-        <div>
-            <h1>Actors</h1>
+  return (
+    <div>
+      <h1>Actors</h1>
 
-            <label>Name Actors</label>
-            <input
-                type="text"
-                required={true}
-                value={addMovieStore.movie.actors}
-                placeholder="Name actor"
-                onChange={e => addMovieStore.setMovieActors(e.target.value)} />
-        </div>
-    );
-})
+      <label>Name Actors</label>
+      <input
+        type="text"
+        required={true}
+        value={addMovieStore.movie.actors}
+        placeholder="Name actor"
+        onChange={(e) => addMovieStore.setMovieActors(e.target.value)}
+      />
+    </div>
+  );
+});

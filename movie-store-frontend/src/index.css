@@ -77,7 +77,7 @@
     }
   }
 
-  .header{
+  .header {
     @apply fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-15;
 
     & button {
@@ -85,10 +85,10 @@
     }
   }
 
-  .greating{
+  .greating {
     @apply justify-items-center;
 
-    & h1{
+    & h1 {
       @apply cursor-default;
     }
 
@@ -98,7 +98,6 @@
   }
 
   .add-movie {
-
     @apply w-full bg-light-100/8 px-4 py-3 rounded-lg mt-20 max-w-3xl mx-auto text-white relative;
 
     & h1 {
@@ -122,7 +121,7 @@
     }
 
     & input.cover {
-      @apply flex font-bold ;
+      @apply flex font-bold;
     }
 
     & input::file-selector-button {
@@ -130,7 +129,7 @@
     }
 
     & textarea {
-      @apply  w-full rounded bg-light-200/12 py-4 sm:pr-10 pl-10 text-base text-gray-200 shadow-2xl mb-5 h-30;
+      @apply w-full rounded bg-light-200/12 py-4 sm:pr-10 pl-10 text-base text-gray-200 shadow-2xl mb-5 h-30;
     }
 
     & button {
