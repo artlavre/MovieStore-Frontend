@@ -1,4 +1,5 @@
 ﻿import { observer } from "mobx-react-lite";
+
 import addMovieStore from "../../stores/movies/addMovieStore.ts";
 
 export const LastStep = observer(() => {

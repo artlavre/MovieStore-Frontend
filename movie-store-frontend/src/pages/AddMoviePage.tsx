@@ -1,11 +1,13 @@
-﻿import { useMultiStepForm } from "../hooks/useMultiStepForm.tsx";
-import { FirstStep } from "../hooks/steps/FirstStep.tsx";
-import { FormEvent } from "react";
+﻿import { FormEvent } from "react";
+
 import { useNavigate } from "react-router-dom";
-import { ActorsStep } from "../hooks/steps/ActorsStep.tsx";
-import { LastStep } from "../hooks/steps/LastStep.tsx";
-import addMovieStore from "../stores/movies/addMovieStore.ts";
 import { toast } from "react-toastify";
+
+import { ActorsStep } from "../hooks/steps/ActorsStep.tsx";
+import { FirstStep } from "../hooks/steps/FirstStep.tsx";
+import { LastStep } from "../hooks/steps/LastStep.tsx";
+import { useMultiStepForm } from "../hooks/useMultiStepForm.tsx";
+import addMovieStore from "../stores/movies/addMovieStore.ts";
 
 function AddMoviePage() {
   const navigate = useNavigate();
@@ -19,7 +21,6 @@ function AddMoviePage() {
       return next();
     }
 
-    toast.error("Movie added failed");
     await addMovieStore.addMovie();
 
     if (addMovieStore.state === "done") {

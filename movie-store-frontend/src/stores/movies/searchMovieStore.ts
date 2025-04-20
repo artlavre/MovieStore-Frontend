@@ -1,7 +1,9 @@
-﻿import { Movie } from "../../types/Movie.ts";
-import { makeAutoObservable } from "mobx";
+﻿import { makeAutoObservable } from "mobx";
+
+import { Movie } from "../../types/Movie.ts";
 
 class SearchMovieStore {
+  searchTerm: string = "";
   movies: Movie[] = [];
   error: string = "";
   isLoading: boolean = false;
@@ -9,6 +11,10 @@ class SearchMovieStore {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setSearchTerm(term: string) {
+    this.searchTerm = term;
   }
 
   setMovies(movies: Movie[]) {

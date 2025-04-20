@@ -1,6 +1,7 @@
-﻿import MovieCard from "./MovieCard";
-import { render } from "@testing-library/react";
+﻿import { render } from "@testing-library/react";
+
 import { Movie } from "../types/Movie.ts";
+import MovieCard from "./MovieCard";
 
 const baseMovie: Movie = {
   id: "1",

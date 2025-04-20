@@ -1,5 +1,6 @@
-﻿import addMovieStore from "../../stores/movies/addMovieStore.ts";
-import { observer } from "mobx-react-lite";
+﻿import { observer } from "mobx-react-lite";
+
+import addMovieStore from "../../stores/movies/addMovieStore.ts";
 
 export const FirstStep = observer(() => {
   return (

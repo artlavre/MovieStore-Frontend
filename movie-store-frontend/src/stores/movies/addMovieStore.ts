@@ -1,6 +1,7 @@
-import { AddMovieData } from "../../types/AddMovie.ts";
-import { addMovieRequest } from "../../api/movieApi.ts";
 import { makeAutoObservable } from "mobx";
+
+import { addMovieRequest } from "../../api/movieApi.ts";
+import { AddMovieData } from "../../types/AddMovie.ts";
 
 const baseMovieConfig = {
   movieCover: null,
@@ -12,7 +13,7 @@ const baseMovieConfig = {
   releaseDate: new Date(),
 };
 
-class SearchMovieStore {
+class AddMovieStore {
   movie: AddMovieData;
   state: "idle" | "pending" | "done" | "error" = "idle";
 
@@ -63,6 +64,6 @@ class SearchMovieStore {
   }
 }
 
-const searchMovieStore = new SearchMovieStore();
+const addMovieStore = new AddMovieStore();
 
-export default searchMovieStore;
+export default addMovieStore;

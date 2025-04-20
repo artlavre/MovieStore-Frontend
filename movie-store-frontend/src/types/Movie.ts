@@ -4,5 +4,7 @@
   rating: number;
   coverUrl?: string;
   language: string;
+  actors: string[];
+  description: string;
   releaseDate: string;
 }
