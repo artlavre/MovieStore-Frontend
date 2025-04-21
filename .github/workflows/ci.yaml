@@ -7,12 +7,8 @@ jobs:
   copy_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Copy Github Repository
-        run: |
-          git init
-          git remote add origin "https://github.com/artlavre/MovieStore-Frontend.git"
-          git fetch origin
-          git checkout master
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Look Repository
         run: |
           ls
