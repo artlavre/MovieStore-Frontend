@@ -17,6 +17,8 @@ jobs:
         run: |
           ls
           cd movie-store-frontend
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
       - name: Build Step
         run: |
           npm -v
