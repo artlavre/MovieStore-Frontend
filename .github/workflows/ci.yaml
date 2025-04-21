@@ -1,0 +1,23 @@
+﻿name: RegularCI
+
+on:
+  push:
+
+jobs:
+  copy_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy Github Repository
+        run: |
+          git init
+          git remote add origin "https://github.com/artlavre/MovieStore-Frontend.git"
+          git fetch origin
+          git pull origin
+      - name: Look Repository
+        run: ls
+      - name: Build Step
+        run: |
+          npm -v
+          npm install
+          npm run lint
+          npm run build
