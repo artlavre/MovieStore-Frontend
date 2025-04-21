@@ -9,7 +9,10 @@ jobs:
     steps:
       - name: Copy Github Repository
         run: |
-          git clone https://github.com/artlavre/MovieStore-Frontend.git
+          git init
+          git remote add origin "https://github.com/artlavre/MovieStore-Frontend.git"
+          git fetch origin
+          git checkout master
       - name: Look Repository
         run: |
           ls
