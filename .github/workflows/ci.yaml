@@ -12,7 +12,7 @@ jobs:
           git init
           git remote add origin "https://github.com/artlavre/MovieStore-Frontend.git"
           git fetch origin
-          git checkout main
+          git checkout master
       - name: Look Repository
         run: ls
       - name: Build Step
