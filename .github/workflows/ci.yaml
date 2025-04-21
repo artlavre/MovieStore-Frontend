@@ -14,7 +14,9 @@ jobs:
           git fetch origin
           git checkout master
       - name: Look Repository
-        run: ls
+        run: |
+          ls
+          cd movie-store-frontend
       - name: Build Step
         run: |
           npm -v
