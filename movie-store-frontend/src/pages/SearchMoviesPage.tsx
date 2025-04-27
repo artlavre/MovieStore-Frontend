@@ -7,39 +7,11 @@ import MovieCard from "../components/MovieCard.tsx";
 import Search from "../components/Search.tsx";
 import Spinner from "../components/Spinner.tsx";
 import searchMovieStore from "../stores/movies/searchMovieStore.ts";
+import { SearchPageComponentSelector } from "../components/SearchPageComponentSelector.tsx";
 
 const SearchMoviesPage = observer(() => {
-  const fetchMovies = async (query = "") => {
-    searchMovieStore.setIsLoading(true);
-    searchMovieStore.setError("");
-
-    try {
-      const endppoint = query
-        ? `/movies?title=${encodeURIComponent(query)}`
-        : "/movies";
-
-      const response = await api.get(endppoint);
-
-      if (response.status !== 200) {
-        throw new Error("No movies found");
-      }
-
-      const data = response.data;
-
-      console.log(data);
-
-      searchMovieStore.setMovies(data || []);
-    } catch (error) {
-      searchMovieStore.setError(
-        "Error while fetching movies. Please try again later"
-      );
-    } finally {
-      searchMovieStore.setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchMovies(searchMovieStore.searchTerm);
+    searchMovieStore.searchMovies();
   }, [searchMovieStore.searchTerm]);
 
   return (
@@ -54,26 +26,12 @@ const SearchMoviesPage = observer(() => {
             <span className="text-gradient">Add</span> Movies
           </h1>
 
-          <Search
-            searchTerm={searchMovieStore.searchTerm}
-            setSearchTerm={searchMovieStore.setSearchTerm}
-          />
+          <Search/>
         </section>
 
         <section className="all-movies">
           <h2 className="mt-[40px]">All Movies</h2>
-
-          {searchMovieStore.isLoading ? (
-            <Spinner />
-          ) : searchMovieStore.error ? (
-            <p className="text-red-500">{searchMovieStore.error}</p>
-          ) : (
-            <ul>
-              {searchMovieStore.movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-            </ul>
-          )}
+          <SearchPageComponentSelector />
         </section>
       </div>
     </main>

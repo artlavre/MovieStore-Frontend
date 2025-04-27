@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { MovieInfo } from "../components/MovieInfo.tsx";
 import Spinner from "../components/Spinner.tsx";
 import moviePageStore from "../stores/movies/moviePageStore.ts";
+import { MoviePageComponentSelector } from "../components/MoviePageComponentSelector.tsx";
 
 export const MoviePage = () => {
   const { id } = useParams();
@@ -15,18 +16,7 @@ export const MoviePage = () => {
 
   return (
     <div className="movie-page-wrapper">
-      {moviePageStore.state === "pending" ? (
-        <Spinner />
-      ) : moviePageStore.state === "error" ? (
-        <p className="text-red-500">{moviePageStore.error}</p>
-      ) : (
-        <div className="movie-page">
-          <div className="movie-card">
-            <img src={moviePageStore.movie?.coverUrl} />
-          </div>
-          <MovieInfo />
-        </div>
-      )}
+      <MoviePageComponentSelector />
     </div>
   );
 };
