@@ -26,7 +26,7 @@ const SearchMoviesPage = observer(() => {
             <span className="text-gradient">Add</span> Movies
           </h1>
 
-          <Search/>
+          <Search />
         </section>
 
         <section className="all-movies">
